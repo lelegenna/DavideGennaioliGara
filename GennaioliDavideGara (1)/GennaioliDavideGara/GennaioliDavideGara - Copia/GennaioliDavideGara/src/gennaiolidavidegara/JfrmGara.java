@@ -590,8 +590,7 @@ public class JfrmGara extends javax.swing.JFrame implements GaraListener {
 
     /**
      * Chi arriva per primo al traguardo viene inserito per primo in
-     * ordineArrivo. "synchronized" garantisce che due piloti che arrivano nello
-     * stesso momento non ottengano la stessa posizione.
+
      */
     @Override
     public synchronized void onPilotaFinito(Pilota pilota) {
@@ -603,10 +602,7 @@ public class JfrmGara extends javax.swing.JFrame implements GaraListener {
         aggiungiEvento("🏆 " + pilota.getNome() + " arriva " + posizione + "°!");
     }
 
-    /**
-     * Kimi si ritira → sceglie una vittima casuale e mostra il popup
-     * Talibantonelli. compareAndSet garantisce che succeda una sola volta.
-     */
+    
     public void onKimiRitirato(List<Pilota> tuttiiPiloti) {
         if (!kimiRitirato.compareAndSet(false, true)) {
             return;

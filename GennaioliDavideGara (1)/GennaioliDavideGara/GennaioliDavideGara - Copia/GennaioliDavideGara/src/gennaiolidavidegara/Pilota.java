@@ -99,10 +99,10 @@ public class Pilota implements Runnable {
     public void run() {
         Random rand = new Random();
 
-        // Caso speciale: Kimi Talibantonelli (40% di probabilità di fare casino)
+        // Kimi Talibantonelli (40% di probabilità di fare casino)
         if (nome.equals("Kimi Antonelli") && rand.nextDouble() < 0.40) {
             int giroRitiro = 1 + rand.nextInt(Math.max(1, totalGiri / 3));
-            corriGiri(rand, giroRitiro ); // corre fino al giro prima del ritiro
+            corriGiri(rand, giroRitiro); // corre fino al giro prima del ritiro
             if (stato != Statoauto.Ritirato) {
                 stato = Statoauto.Ritirato;
                 if (listener != null) {
@@ -113,7 +113,7 @@ public class Pilota implements Runnable {
                     frmGara.onKimiRitirato(frmGara.getPiloti());
                 }
             }
-            return; // il thread di Kimi finisce qui
+            return;
         }
 
         // Caso normale: corre tutti i giri
@@ -130,18 +130,18 @@ public class Pilota implements Runnable {
      *
      * Pit stop scaglionato: giroBox = (38% + indiceGriglia × 2.5%) del totale
      * giri ± 2 giri casuali Risultato: P1 va ai box ~38%, P6 va ai box ~52%
-     * della gara → impossibile che tutti vadano ai box nello stesso giro
-     
+     *
+     *
      */
     private void corriGiri(Random rand, int maxGiri) {
         // Calcola il giro del pit stop per questo pilota
         int offsetGiri = (int) (totalGiri * (0.38 + indiceGriglia * 0.025));
         int giroBox = offsetGiri + rand.nextInt(5) - 2; // ±2 giri di casualità
-        giroBox = Math.max(3, Math.min(giroBox, totalGiri - 3)); // non ai box giro 1 o ultimo
+        giroBox = Math.max(3, Math.min(giroBox, totalGiri - 3));
 
         for (int giro = 1; giro <= maxGiri; giro++) {
 
-            // Se è già ritirato (da un giro precedente), smetti
+            // Se è già ritirato , smetti
             if (stato == Statoauto.Ritirato) {
                 break;
             }
@@ -155,7 +155,7 @@ public class Pilota implements Runnable {
                 break;
             }
 
-            // Ritiro casuale: 1% di probabilità per ogni giro (guasto, incidente)
+            // Ritiro casuale: 1% di probabilità per ogni giro 
             if (rand.nextDouble() < 0.01) {
                 stato = Statoauto.Ritirato;
                 if (listener != null) {
@@ -205,7 +205,7 @@ public class Pilota implements Runnable {
      * variazione casuale ± bonus/malus gomme.
      *
      * MORBIDE: -1.5 secondi (più veloci) INTERMEDIE: +0.5 secondi DURE: +1.0
-     * secondo (più lente) Casualità: ±1.5 secondi 
+     * secondo (più lente) Casualità: ±1.5 secondi
      *
      */
     private double calcolaTempoGiro(Random rand) {
@@ -224,7 +224,6 @@ public class Pilota implements Runnable {
         base += (rand.nextDouble() - 0.5) * 3.0; // casualità tra -1.5 e +1.5
         return Math.round(base * 100.0) / 100.0;  // arrotonda a 2 decimali
     }
-
 
     public String getNome() {
         return nome;
@@ -255,14 +254,14 @@ public class Pilota implements Runnable {
     }
 
     /**
-     * Restituisce il miglior tempo sul giro. 
+     * Restituisce il miglior tempo sul giro.
      */
     public double getMiglioreGiro() {
         return miglioreGiro == Double.MAX_VALUE ? 0 : miglioreGiro;
     }
 
     /**
-     * Restituisce "Nome (Scuderia)" - usato nei messaggi dell'area eventi.
+     * Restituisce "Nome (Scuderia)"
      */
     @Override
     public String toString() {
