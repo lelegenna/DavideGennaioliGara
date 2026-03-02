@@ -68,30 +68,36 @@ public class JfrmGara extends javax.swing.JFrame implements GaraListener {
 
     // Emoji per le etichette testo
     private static String getMacchina(String scuderia) {
-        switch (scuderia) {
-            case "Red Bull Racing":
-                return "🔵";
-            case "McLaren":
-                return "🟠";
-            case "Ferrari":
-                return "🔴";
-            case "Mercedes":
-                return "⚫";
-            case "Aston Martin":
-                return "🟢";
-            case "Williams":
-                return "🔷";
-            case "Alpine":
-                return "🟦";
-            case "Haas":
-                return "⬜";
-            case "RB":
-                return "🟣";
-            case "Sauber":
-                return "🟡";
-            default:
-                return "🏎";
-        }
+       
+             
+
+    switch (scuderia.toLowerCase()) {
+
+        case "ferrari":
+            return "🔴🏎";  
+
+        case "red bull":
+            return "🔵🏎";
+
+        case "mercedes":
+            return "⚫🏎";
+
+        case "mclaren":
+            return "🟠🏎";
+
+        case "aston martin":
+            return "🟢🏎";
+
+        case "alpine":
+            return "🔵🏎";
+
+        case "williams":
+            return "🔷🏎";
+
+        default:
+            return "🏎";
+    }
+        
     }
 
     //  PROGRESS BAR con solo la sagoma F1
