@@ -1,0 +1,11 @@
+frame iniziale riga 282
+codice
+  for (Pilota p : gara.getPiloti()){
+        if (p.getNome().equals("Max Verstappen")) p.maxVerstappen();
+        }
+
+pilota riga 226
+codice 
+public void maxVerstappen() {
+    if (Math.random() < 0.50) this.delayBase = (int)(this.delayBase * 0.65);
+}
